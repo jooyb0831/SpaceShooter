@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    private Transform tr;
+    [SerializeField] private Transform tr;
+
+    //이동속도 변수
+    public float moveSpeed = 10.0f;
     // Start is called before the first frame update
     void Start()
     {   
@@ -21,9 +24,11 @@ public class PlayerCtrl : MonoBehaviour
         Debug.Log("v="+v);
 
         //Transform 컴포넌트의 position 속성값을 변경
-        tr.position += Vector3.forward * 1;
+        //tr.position += Vector3.forward * 1;
 
         //Translate
-        tr.Translate(Vector3.forward * 1.0f);
+        tr.Translate(Vector3.forward * Time.deltaTime * v * moveSpeed); //포워드로 초당 10유닛만큼 이동하는.
+        //Translate(이동할 방향 * time.deltaTime * 전/후진 변수 * 속도)
+
     }
 }
