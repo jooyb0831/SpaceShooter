@@ -42,9 +42,9 @@ public class PlayerCtrl : MonoBehaviour
         //Translate
         tr.Translate(moveDir.normalized * Time.deltaTime * moveSpeed); //포워드로 초당 10유닛만큼 이동하는.
         //Translate(이동할 방향 * time.deltaTime * 전/후진 변수 * 속도)
-        //normailzed : 정규화백터속성->대각선으로 해도1.
+        //normailzed : 정규화 벡터속성->대각선으로 해도 1.
 
-        //Vector3.up 축을 기준으로 turnSpeed 만크의 속도로 회전
+        //Vector3.up 축을 기준으로 turnSpeed 만큼의 속도로 회전
         tr.Rotate(Vector3.up * turnSpeed * Time.deltaTime * r);
 
         
@@ -55,11 +55,11 @@ public class PlayerCtrl : MonoBehaviour
 
     void PlayerAnim(float h, float v)
     {
-        if(v>=0.1f)
+        if (v >= 0.1f)
         {
             anim.CrossFade("RunF", 0.25f);
         }
-        else if ( v<= -0.1f)
+        else if (v <= -0.1f)
         {
             anim.CrossFade("RunB", 0.25f);
         }
