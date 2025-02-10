@@ -89,14 +89,15 @@ public class BarrelCtrl : MonoBehaviour
         // Collider[] colls = Physics.OverlapSphere(pos, radius, 1<<3);
 
         //가비지 컬렉션 발생하지 않음
-        Physics.OverlapSphereNonAlloc(pos, radius, colls, 1<<3);
+        Physics.OverlapSphereNonAlloc(pos, radius, colls, 1<<3);  //1<<3 : 3번 레이어-> 십진수로 쓰려면 8 이렇게 써야해서 편하게 그냥 3;
+        // 비트연산
+        // 1<<8 | 1<<9 : OR. 8번 또는 9번 레이어
+        // ~(1<<8) : NOT. 8번 레이어를 제외한 모든 레이어.
 
         foreach(var coll in colls)
         {
-            if(coll==null)
-            {
-                continue;
-            }
+            //coll의 null체크
+            if(coll==null) continue;
             //폭발 범위에 포함된 드럼통의 rigidbody 컴포넌트 추출
             rb = coll.GetComponent<Rigidbody>();
             //드럼통의 무게를 가볍게 함
