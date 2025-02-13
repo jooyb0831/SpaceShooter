@@ -50,7 +50,7 @@ public class FireCtrl : MonoBehaviour
 
     IEnumerator ShowMuzzleFlash()
     {
-        //오프셋 좌표값을 랜덤 함수로 생성
+        //오프셋 좌표값을 랜덤 함수로 생성 intRandom.Range(포함,불포함) floatRandom.Range(포함, 포함)
         Vector2 offset = new Vector2(Random.Range(0,2), Random.Range(0,2)) * 0.5f;
         //텍스처의 오프셋 값 설정
         muzzleFlash.material.mainTextureOffset = offset;
