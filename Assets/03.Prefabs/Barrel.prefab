@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5186167146751955269
 Transform:
@@ -102,7 +102,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8622213358615403263
 Transform:
@@ -151,6 +151,17 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 0aa4112bfd022aa47919f151ba79ddc1, type: 3}
   - {fileID: 2800000, guid: d38462a18d74e454aaf079b02bc753cd, type: 3}
   radius: 10
+  colls:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!111 &178087561099339620
 Animation:
   m_ObjectHideFlags: 0
