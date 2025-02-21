@@ -13,12 +13,19 @@ public class PlayerCtrl : MonoBehaviour
     //회전속도 변수
     public float turnSpeed;
 
+    //초기 생명 값
+    private readonly float initHP = 100.0f;
+    //현재 생명 값
+    public float currHP;
+
     // Start is called before the first frame update
     IEnumerator Start() //스타트는 코루틴으로 변경가능.StartCorutine없어도 됨(Start함수라)
-    {   
+    {
         tr = GetComponent<Transform>();
         anim = GetComponent<Animation>();
 
+        //HP 초기화
+        currHP = initHP;
         //애니메이션 실행
         anim.Play("Idle");
 
@@ -42,7 +49,7 @@ public class PlayerCtrl : MonoBehaviour
 
 
         //전후좌우 이동방향 벡터계산
-        Vector3 moveDir = (Vector3.forward * v) + (Vector3.right*h);
+        Vector3 moveDir = (Vector3.forward * v) + (Vector3.right * h);
         //Translate
         tr.Translate(moveDir.normalized * Time.deltaTime * moveSpeed); //포워드로 초당 10유닛만큼 이동하는.
         //Translate(이동할 방향 * time.deltaTime * 전/후진 변수 * 속도)
@@ -51,9 +58,9 @@ public class PlayerCtrl : MonoBehaviour
         //Vector3.up 축을 기준으로 turnSpeed 만큼의 속도로 회전
         tr.Rotate(Vector3.up * turnSpeed * Time.deltaTime * r);
 
-        
+
         //주인공 캐릭터 애니메이션 설정
-        PlayerAnim(h,v);
+        PlayerAnim(h, v);
 
     }
 
@@ -79,5 +86,29 @@ public class PlayerCtrl : MonoBehaviour
         {
             anim.CrossFade("Idle", 0.25f);
         }
+    }
+
+    //충돌한 collider의 isTrigger 값이 체크되어 있을 때 발생
+    void OnTriggerEnter(Collider coll)
+    {
+        //충돌한 collider가 몬스터의 PUNCH이면 Player의 HP 차감
+        if (currHP >= 0 && coll.CompareTag("PUNCH"))
+        {
+            currHP -= 10;
+            Debug.Log($"Player HP : {currHP} / {initHP}");
+
+            //Player의 생명이 0 이하이면 사망처리
+
+            if (currHP <= 0)
+            {
+                PlayerDie();
+            }
+        }
+    }
+
+    //Player사망 처리
+    void PlayerDie()
+    {
+        Debug.Log("Player Die!");
     }
 }
