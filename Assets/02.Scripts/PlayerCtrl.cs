@@ -109,6 +109,16 @@ public class PlayerCtrl : MonoBehaviour
     //Player사망 처리
     void PlayerDie()
     {
+        //Monster 태그를 가진 모든 게임오브젝트들을 찾아옴
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("MONSTER");
+
+        //모든 몬스터의 OnPlayerDie함수를 순차적으로 호출
+        foreach(GameObject monster in monsters)
+        {
+            monster.SendMessage("OnPlayerDie", SendMessageOptions.DontRequireReceiver);
+            //SendMessage : 첫 번째 인자로 전달한 함수명과 동일한 함수가 해당 게임 오브젝트 스크립트에 있다면 실행
+            //DontRequireReceiver:호출한 함수가 없더라도 함수가 없다는 반환 안 받음.
+        }
         Debug.Log("Player Die!");
     }
 }
