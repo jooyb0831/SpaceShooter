@@ -179,10 +179,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7622971650570488046}
+  - component: {fileID: 7622971648835065226}
   - component: {fileID: 7622971650580309838}
   - component: {fileID: 7622971648835065268}
   - component: {fileID: 7622971648835065227}
-  - component: {fileID: 7622971648835065226}
   m_Layer: 6
   m_Name: Monster
   m_TagString: MONSTER
@@ -212,6 +212,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7622971648835065226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7622971650570917070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0166010ce06e64abe4e80f48c25a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  traceDist: 10
+  attackDist: 2
+  isDie: 0
 --- !u!95 &7622971650580309838
 Animator:
   serializedVersion: 5
@@ -269,22 +285,6 @@ NavMeshAgent:
   m_BaseOffset: -0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7622971648835065226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7622971650570917070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be0166010ce06e64abe4e80f48c25a97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  traceDist: 10
-  attackDist: 2
-  isDie: 0
 --- !u!1 &7622971650570917092
 GameObject:
   m_ObjectHideFlags: 0

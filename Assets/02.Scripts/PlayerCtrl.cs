@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
+#region Private
     private Transform tr;
     private Animation anim;
+    
+    //초기 생명 값
+    private readonly float initHP = 100.0f;
+#endregion
+
+#region Public
+    //현재 생명 값
+    public float currHP;
 
     //이동속도 변수
     public float moveSpeed = 10.0f;
-
     //회전속도 변수
     public float turnSpeed;
+    //델리게이트 선언
+    public delegate void PlayerDieHandler();
+    //이벤트 선언
+    public static event PlayerDieHandler OnPlayerDie;
 
-    //초기 생명 값
-    private readonly float initHP = 100.0f;
-    //현재 생명 값
-    public float currHP;
+#endregion
 
     // Start is called before the first frame update
     IEnumerator Start() //스타트는 코루틴으로 변경가능.StartCorutine없어도 됨(Start함수라)
@@ -94,6 +103,13 @@ public class PlayerCtrl : MonoBehaviour
         //충돌한 collider가 몬스터의 PUNCH이면 Player의 HP 차감
         if (currHP >= 0 && coll.CompareTag("PUNCH"))
         {
+            /*
+            MonsterCtrl monster = coll.transform.parent.GetComponent<MonsterCtrl>();
+            if(monster.state != MonsterCtrl.State.ATTACK)
+            {
+                return;
+            }
+            */
             currHP -= 10;
             Debug.Log($"Player HP : {currHP} / {initHP}");
 
@@ -109,6 +125,8 @@ public class PlayerCtrl : MonoBehaviour
     //Player사망 처리
     void PlayerDie()
     {
+        Debug.Log("Player Die!");
+        /*
         //Monster 태그를 가진 모든 게임오브젝트들을 찾아옴
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("MONSTER");
 
@@ -119,6 +137,12 @@ public class PlayerCtrl : MonoBehaviour
             //SendMessage : 첫 번째 인자로 전달한 함수명과 동일한 함수가 해당 게임 오브젝트 스크립트에 있다면 실행
             //DontRequireReceiver:호출한 함수가 없더라도 함수가 없다는 반환 안 받음.
         }
-        Debug.Log("Player Die!");
+        */
+
+        //Todo : UI에서 게임 오버 화면 추가 예정
+        //UI직접 연결 말고 이벤트 호출을 통해서
+        //주인공 사망 처리 이벤트 호출(발생)
+        OnPlayerDie();
     }
+
 }

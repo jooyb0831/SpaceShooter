@@ -20,12 +20,26 @@ public class FireCtrl : MonoBehaviour
     private new AudioSource audio;
 
     private MeshRenderer muzzleFlash;
+
+    void OnEnable()
+    {
+        PlayerCtrl.OnPlayerDie += this.OnPlayerDie;
+    }
+
+    void OnDisable()
+    {
+        PlayerCtrl.OnPlayerDie -= this.OnPlayerDie;
+    }
+
+    private bool isPlayerDie;
+
     // Start is called before the first frame update
     void Start()
     {
-        audio= GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
         muzzleFlash = firePos.GetComponentInChildren<MeshRenderer>();
         muzzleFlash.enabled = false;
+        isPlayerDie = false;
     }
 
     // Update is called once per frame
@@ -34,9 +48,15 @@ public class FireCtrl : MonoBehaviour
         //마우스 왼쪽 눌렀을 때 Fire함수 호출
         if(Input.GetMouseButtonDown(0))
         {
+            if(isPlayerDie) return;
             Fire();
         }
 
+    }
+
+    public void OnPlayerDie()
+    {
+        isPlayerDie = true;
     }
 
     void Fire()
