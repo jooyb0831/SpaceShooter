@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class PlayerCtrl : MonoBehaviour
     //현재 생명 값
     public float currHP;
 
+    //HpBar연결할 변수
+    public Image hpBar;
+
     //이동속도 변수
     public float moveSpeed = 10.0f;
     //회전속도 변수
@@ -25,6 +29,7 @@ public class PlayerCtrl : MonoBehaviour
     //이벤트 선언
     public static event PlayerDieHandler OnPlayerDie;
 
+
 #endregion
 
     // Start is called before the first frame update
@@ -32,6 +37,20 @@ public class PlayerCtrl : MonoBehaviour
     {
         tr = GetComponent<Transform>();
         anim = GetComponent<Animation>();
+        //HPbar 연결
+        //hpbar태그 검색한게 없으면null 반환
+        hpBar = GameObject.FindGameObjectWithTag("HP_BAR")?.GetComponent<Image>();
+        /*
+        GameObject go = GameObject.FindGameObjectWithTag("HP_BAR");
+        if(go == null)
+        {
+            hpBar = null;
+        }
+        else
+        {
+            hpBar = go.GetComponent<Image>();
+        }
+        */
 
         //HP 초기화
         currHP = initHP;
@@ -111,6 +130,7 @@ public class PlayerCtrl : MonoBehaviour
             }
             */
             currHP -= 10;
+            DisplayHealth();
             Debug.Log($"Player HP : {currHP} / {initHP}");
 
             //Player의 생명이 0 이하이면 사망처리
@@ -120,6 +140,15 @@ public class PlayerCtrl : MonoBehaviour
                 PlayerDie();
             }
         }
+    }
+
+    void DisplayHealth()
+    {
+        if (hpBar == null)
+        {
+            return;
+        }
+        hpBar.fillAmount = currHP/initHP;
     }
 
     //Player사망 처리
@@ -144,5 +173,6 @@ public class PlayerCtrl : MonoBehaviour
         //주인공 사망 처리 이벤트 호출(발생)
         OnPlayerDie();
     }
+
 
 }

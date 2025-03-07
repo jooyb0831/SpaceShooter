@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class MonsterCtrl : MonoBehaviour
 {
@@ -174,6 +176,8 @@ public class MonsterCtrl : MonoBehaviour
                     GetComponent<CapsuleCollider>().enabled = false;
                     //몬스터 손에 달려있는 Collider도 비활성화
                     SphereCollider[] colls = GetComponentsInChildren<SphereCollider>();
+
+                    //UI에 표시
                     foreach (var item in colls)
                     {
                         item.enabled = false;
@@ -253,6 +257,12 @@ public class MonsterCtrl : MonoBehaviour
         agent.isStopped = true;
         anim.SetFloat(hashSpeed, Random.Range(0.8f, 1.2f));
         anim.SetTrigger(hashyPlayerDie);
+    }
+
+    private TMP_Text killCnt;
+    void KillCntUI()
+    {
+
     }
 
     // Update is called once per frame
